@@ -22,5 +22,8 @@ git submodule update --init --remote
 - `build.config.gki.aarch64.chickernel`
 - `build.config.gki.aarch64.chickernel.ksu`
 
+**This kernel is built with a newer toolchain as defined in `build.config.constants`**
+- Ensure you have the correct prebuilt downloaded from [this site](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/heads/main)
+
 # ⛔ Report Issues
 Please [report issues here](https://github.com/chickendrop89/device_xiaomi_unified-recovery/issues), or to my telegram
