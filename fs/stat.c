@@ -24,6 +24,10 @@
 #include "internal.h"
 #include "mount.h"
 
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+extern void susfs_sus_ino_for_generic_fillattr(unsigned long ino, struct kstat *stat);
+#endif
+
 /**
  * generic_fillattr - Fill in the basic attributes from the inode struct
  * @mnt_userns:	user namespace of the mount the inode was found from
@@ -43,6 +47,16 @@
 void generic_fillattr(struct user_namespace *mnt_userns, struct inode *inode,
 		      struct kstat *stat)
 {
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+	if (unlikely(inode->i_state & 67108864)) {
+		susfs_sus_ino_for_generic_fillattr(inode->i_ino, stat);
+		stat->mode = inode->i_mode;
+		stat->rdev = inode->i_rdev;
+		stat->uid = i_uid_into_mnt(mnt_userns, inode);
+		stat->gid = i_gid_into_mnt(mnt_userns, inode);
+		return;
+	}
+#endif
 	stat->dev = inode->i_sb->s_dev;
 	stat->ino = inode->i_ino;
 	stat->mode = inode->i_mode;
@@ -199,12 +213,24 @@ int vfs_fstat(int fd, struct kstat *stat)
  *
  * 0 will be returned on success, and a -ve error code if unsuccessful.
  */
+
+#ifdef CONFIG_KSU_SUSFS_SUS_SU
+extern bool susfs_is_sus_su_hooks_enabled __read_mostly;
+extern int ksu_handle_stat(int *dfd, const char __user **filename_user, int *flags);
+#endif
+
 static int vfs_statx(int dfd, const char __user *filename, int flags,
 	      struct kstat *stat, u32 request_mask)
 {
 	struct path path;
 	unsigned lookup_flags = 0;
 	int error;
+
+#ifdef CONFIG_KSU_SUSFS_SUS_SU
+	if (susfs_is_sus_su_hooks_enabled) {
+		ksu_handle_stat(&dfd, &filename, &flags);
+	}
+#endif
 
 	if (flags & ~(AT_SYMLINK_NOFOLLOW | AT_NO_AUTOMOUNT | AT_EMPTY_PATH |
 		      AT_STATX_SYNC_TYPE))
