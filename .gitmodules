@@ -1,3 +1,4 @@
 [submodule "KernelSU"]
 	path = KernelSU
 	url = https://github.com/chickendrop89/KernelSU
+	shallow = true
