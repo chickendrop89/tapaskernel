@@ -7,7 +7,7 @@
 DEFCONFIG_PATH=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs
 
 DEFCONFIG=chickernel_defconfig
-FRAGMENT_CONFIG=${DEFCONFIG_PATH}/chickernel-variants/ksu.config
+FRAGMENT_CONFIG=${DEFCONFIG_PATH}/chickernel-variants/ksu.susfs.config
 
 PRE_DEFCONFIG_CMDS="
 cp ${DEFCONFIG_PATH}/${DEFCONFIG} ${DEFCONFIG_PATH}/.tmp.${DEFCONFIG}; \
