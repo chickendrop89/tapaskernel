@@ -21,6 +21,7 @@ git submodule update --init --remote
 **This kernel is built with these configurations:**
 - `build.config.gki.aarch64.chickernel`
 - `build.config.gki.aarch64.chickernel.ksu`
+- `build.config.gki.aarch64.chickernel.ksu.susfs` **(SuSFS branch)**
 
 **This kernel is built with a newer toolchain as defined in `build.config.constants`**
 - Ensure you have the correct prebuilt downloaded from [this site](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/heads/main)
