@@ -159,8 +159,6 @@ static irqreturn_t q6v5_wdog_interrupt(int irq, void *data)
 	struct qcom_q6v5 *q6v5 = data;
 	size_t len;
 	char *msg;
-  	char reason[MAX_SSR_REASON_LEN];
-  	const char *name = q6v5->rproc->firmware;
 
 	/* Sometimes the stop triggers a watchdog rather than a stop-ack */
 	if (!q6v5->running) {
@@ -200,8 +198,6 @@ static irqreturn_t q6v5_fatal_interrupt(int irq, void *data)
 	struct qcom_q6v5 *q6v5 = data;
 	size_t len;
 	char *msg;
-  	char reason[MAX_SSR_REASON_LEN];
-  	const char *name = q6v5->rproc->firmware;
 
 	if (!q6v5->running) {
 		dev_info(q6v5->dev, "received fatal irq while q6 is offline\n");
