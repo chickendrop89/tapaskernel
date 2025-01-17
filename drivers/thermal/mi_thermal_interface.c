@@ -510,7 +510,7 @@ static void screen_state_check(struct work_struct *work)
 	struct device_node *node;
 	void *pvt_data = NULL;
 	int error = 0;
-	static retry_count = 10;
+	static int retry_count = 10;
 
 	node = of_find_node_by_name(NULL, "thermal-screen");
 	if (!node) {
