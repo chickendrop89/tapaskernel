@@ -99,6 +99,13 @@ u32 panel_info = 1;
 EXPORT_SYMBOL(panel_info);
 #endif
 
+/* struct hs_phy_priv_data - target specific private data */
+struct hs_phy_priv_data {
+	bool limit_control_vdd;
+	bool limit_control_vdda_18;
+	bool limit_control_vdda33;
+};
+
 struct msm_hsphy {
 	struct usb_phy		phy;
 	void __iomem		*base;
